@@ -23,8 +23,9 @@ function Toast({ variant = "notice", message, onClose }) {
 
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
-      <div className={styles.iconContainer}></div>
-      <Icon size={24} />
+      <div className={styles.iconContainer}>
+        <Icon size={24} />
+      </div>
       <p className={styles.content}>{message}</p>
       <button className={styles.closeButton} onClick={onClose}>
         <X size={24} />
