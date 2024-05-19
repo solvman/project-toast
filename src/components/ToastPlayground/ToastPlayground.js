@@ -3,13 +3,16 @@ import React from "react";
 import Button from "../Button";
 
 import styles from "./ToastPlayground.module.css";
-import Radio from "../Radio/Radio";
+import Radio from "../Radio";
+import Toast from "../Toast";
+import useToggle from "../../hooks/use-toggle";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [message, setMessage] = React.useState("");
+  const [isVisible, toggleIsVisible] = useToggle(true);
 
   return (
     <div className={styles.wrapper}>
@@ -17,6 +20,10 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      {isVisible && (
+        <Toast variant={variant} message={message} onClose={toggleIsVisible} />
+      )}
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
@@ -51,7 +58,7 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={toggleIsVisible}>Pop Toast!</Button>
           </div>
         </div>
       </div>
